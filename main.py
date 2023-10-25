@@ -1,7 +1,9 @@
-#-*- coding = utf-8-*-
+# -*- coding = utf-8-*-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+torch.manual_seed(1) # set the random seed
 
 #Convolutional Neural Network Architecture
 class CNN_MNISTClassifier(nn.Module):
@@ -22,3 +24,8 @@ class CNN_MNISTClassifier(nn.Module):
         return x
     
     print('Convolutional Neural Network Architecture Done')
+
+if __name__ == '__main__':
+    print("CNN")
+    model = CNN_MNISTClassifier()
+    print(model)
