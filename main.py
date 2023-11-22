@@ -9,15 +9,18 @@ torch.manual_seed(1) # set the random seed
 class CNN_MNISTClassifier(nn.Module):
     def __init__(self):
         super(CNN_MNISTClassifier, self).__init__()
-        self.conv1 = nn.Conv2d(1, 5, 5) #in_channels, out_chanels, kernel_size
+        self.conv1 = nn.Conv2d(3, 64, 8) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
-        self.conv2 = nn.Conv2d(5, 10, 5) #in_channels, out_chanels, kernel_size
-        self.fc1 = nn.Linear(160, 32)
-        self.fc2 = nn.Linear(32, 10)
+        self.conv2 = nn.Conv2d(64, 64, 4) #in_channels, out_chanels, kernel_size
+        self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
+        self.conv3 = nn.Conv2d(64, 64, 2) #in_channels, out_chanels, kernel_size
+        self.fc1 = nn.Linear(64, 256)
+        self.fc2 = nn.Linear(256, 3)
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
+        x = self.pool(F.relu(self.conv3(x)))
         x = x.view(-1, 160)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
