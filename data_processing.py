@@ -2,7 +2,8 @@ import matplotlib.pyplot as plt
 import importrhdutilities as rhd
 
 def generate_frame(data):
-    plt.imshow( data[:,0:100] )
+    # plt.imshow( data[:,0:100] )
+    plt.imshow( data[:,30000:30100] )
     plt.show()
     
 
