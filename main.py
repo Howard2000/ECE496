@@ -12,29 +12,29 @@ torch.manual_seed(1) # set the random seed
 class RatDataset(Dataset):
 
     def __init__(self, train = True):
-        self.folds = [[],[],[]]
+        self.fold = [[],[],[]]
 
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat4Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat5Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat6Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat7Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat8Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat9Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat10Training_Fold1.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat4Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat5Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat6Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat7Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat8Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat9Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat10Training_Fold2.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat4Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat5Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat6Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat7Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat8Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat9Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('/Users/medinalarapablo/Desktop/ESCAPE-NET Code/Training Sets/TPR/7x8/Rat10Training_Fold3.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
+        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
+        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
+        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
 
         self.data = torch.empty(0,5600)
         self.labels = torch.empty(0)
@@ -56,14 +56,14 @@ class RatDataset(Dataset):
                     self.labels = torch.cat((self.labels, test_labels), 0)
 
 
-        def __len__(self):
-            return len(self.labels)
+    def __len__(self):
+        return torch.numel(self.labels)
 
-        def __getitem__(self, idx):
-            if torch.is_tensor(idx):
-                idx = idx.tolist()
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
 
-            return self.data[idx], self.label[idx]
+        return self.data[idx], self.label[idx]
     
 
 #Convolutional Neural Network Architecture
@@ -116,11 +116,13 @@ class CNN_Classifier_2(nn.Module):
     print('Convolutional Neural Network Architecture Done')
 
 def get_accuracy(model, data):
-
+    device = torch.device('cuda:0')   
+    kwargs = {'num_workers': 1, 'pin_memory': True}
     correct = 0
     total = 0
-    for imgs, labels in torch.utils.data.DataLoader(data, batch_size=64):
-
+    for imgs, labels in torch.utils.data.DataLoader(data, batch_size=64, **kwargs):
+        imgs = imgs.to(device)
+        labels = labels.to(device)
         output = model(imgs)
 
         #select index with maximum prediction score
@@ -130,7 +132,9 @@ def get_accuracy(model, data):
     return correct / total
 
 def train(model, data, batch_size=64, num_epochs=1):
-    train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size)
+    device = torch.device('cuda:0')   
+    kwargs = {'num_workers': 1, 'pin_memory': True}
+    train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, **kwargs)
     test_data = RatDataset(False)
     # test_loader = torch.utils.data.DataLoader(test_data, batch_size = batch_size)
     criterion = nn.CrossEntropyLoss()
@@ -142,7 +146,8 @@ def train(model, data, batch_size=64, num_epochs=1):
     n = 0 # the number of iterations
     for epoch in range(num_epochs):
         for imgs, labels in iter(train_loader):
-
+            imgs = imgs.to(device)
+            labels = labels.to(device)
             out = model(imgs)             # forward pass
 
             loss = criterion(out, labels) # compute the total loss
@@ -176,8 +181,9 @@ def train(model, data, batch_size=64, num_epochs=1):
     print("Final Validation Accuracy: {}".format(val_acc[-1]))
 
 if __name__ == '__main__':
+    device = torch.device('cuda:0')
     print("CNN")
-    model = CNN_Classifier()
+    model = CNN_Classifier().to(device)
     data = RatDataset(train = True)
     train(model, data)
     print(model)
