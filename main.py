@@ -16,36 +16,39 @@ class RatDataset(Dataset):
 
         self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
         self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
+        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
+        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
+        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
+        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
+        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
+        print("Done ")
         self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
         self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
+        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
+        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
+        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
+        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
+        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
+        print("Done ")
         self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
         self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
-
+        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
+        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
+        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
+        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
+        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
+        print("Done ")
         self.data = torch.empty(0,5600)
         self.labels = torch.empty(0)
 
         for i in range (3):
-            for j in range (7):
+            for j in range (2):
                 if train:
                     train_data = torch.tensor(self.fold[i][j]['training_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, train_data), 0)
 
                     train_lables = torch.tensor(self.fold[i][j]['training_data_labels']).squeeze(1)
+                    train_lables = torch.sub(train_lables, torch.ones_like(train_lables))
                     self.labels = torch.cat((self.labels, train_lables), 0)
 
                 else:
@@ -53,8 +56,10 @@ class RatDataset(Dataset):
                     self.data = torch.cat((self.data, test_data), 0)
 
                     test_labels = torch.tensor(self.fold[i][j]['test_data_labels']).squeeze(1)
-                    self.labels = torch.cat((self.labels, test_labels), 0)
+                    test_labels = torch.sub(test_labels, torch.ones_like(test_labels))
 
+                    self.labels = torch.cat((self.labels, test_labels), 0)
+        print("Data done")
 
     def __len__(self):
         return torch.numel(self.labels)
@@ -63,42 +68,45 @@ class RatDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        return self.data[idx], self.label[idx]
+        return self.data[idx], self.labels[idx]
     
 
 #Convolutional Neural Network Architecture
 class CNN_Classifier(nn.Module):
     def __init__(self):
         super(CNN_Classifier, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, 8) #in_channels, out_chanels, kernel_size
+        self.conv1 = nn.Conv2d(1, 64, 8) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv2 = nn.Conv2d(64, 64, 4) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv3 = nn.Conv2d(64, 64, 2) #in_channels, out_chanels, kernel_size
-        self.fc1 = nn.Linear(64, 256)
+        self.fc1 = nn.Linear(2560, 256)
         self.fc2 = nn.Linear(256, 3)
+        print('Convolutional Neural Network Architecture Done')
+
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         x = self.pool(F.relu(self.conv3(x)))
-        x = x.view(-1, 160)
+        x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x
     
-    print('Convolutional Neural Network Architecture Done')
 
 class CNN_Classifier_2(nn.Module):
     def __init__(self):
         super(CNN_Classifier_2, self).__init__()
-        self.conv1 = nn.Conv2d(3, 64, 8) #in_channels, out_chanels, kernel_size
+        self.conv1 = nn.Conv2d(1, 64, 8) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv2 = nn.Conv2d(64, 64, 4) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv3 = nn.Conv2d(64, 64, 2) #in_channels, out_chanels, kernel_size
-        self.fc1 = nn.Linear(64, 256)
+        self.fc1 = nn.Linear(2560, 256)
         self.fc2 = nn.Linear(256, 3)
+        print('Convolutional Neural Network 2 Architecture Done')
+
 
     def forward(self, x, y):
         x = self.pool(F.relu(self.conv1(x)))
@@ -108,22 +116,20 @@ class CNN_Classifier_2(nn.Module):
         y = self.pool(F.relu(self.conv2(y)))
         y = self.pool(F.relu(self.conv3(y)))
         z = torch.cat((x,y),dim=1)
-        z = z.view(-1, 160)
+        z = z.view(64, -1)
         z = F.relu(self.fc1(z))
         z = self.fc2(z)
         return z
     
-    print('Convolutional Neural Network Architecture Done')
-
 def get_accuracy(model, data):
     device = torch.device('cuda:0')   
-    kwargs = {'num_workers': 1, 'pin_memory': True}
+    kwargs = {'num_workers': 2, 'pin_memory': False}
     correct = 0
     total = 0
     for imgs, labels in torch.utils.data.DataLoader(data, batch_size=64, **kwargs):
         imgs = imgs.to(device)
         labels = labels.to(device)
-        output = model(imgs)
+        output = model(torch.reshape(imgs, (-1,1,100,56)))
 
         #select index with maximum prediction score
         pred = output.max(1, keepdim=True)[1]
@@ -132,8 +138,9 @@ def get_accuracy(model, data):
     return correct / total
 
 def train(model, data, batch_size=64, num_epochs=1):
-    device = torch.device('cuda:0')   
-    kwargs = {'num_workers': 1, 'pin_memory': True}
+    device = torch.device('cuda:0')
+    torch.set_default_device('cuda:0')
+    kwargs = {'num_workers': 2, 'pin_memory': True}
     train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, **kwargs)
     test_data = RatDataset(False)
     # test_loader = torch.utils.data.DataLoader(test_data, batch_size = batch_size)
@@ -146,9 +153,12 @@ def train(model, data, batch_size=64, num_epochs=1):
     n = 0 # the number of iterations
     for epoch in range(num_epochs):
         for imgs, labels in iter(train_loader):
+            if (n % 500 == 0 ):
+                print(f"TRaining {n}")
             imgs = imgs.to(device)
             labels = labels.to(device)
-            out = model(imgs)             # forward pass
+            out = model(torch.reshape(imgs, (64,1,100,56))).to(device)         
+            labels = labels.type(torch.LongTensor).to(device)    # forward pass
 
             loss = criterion(out, labels) # compute the total loss
             loss.backward()               # backward pass (compute parameter updates)
@@ -187,3 +197,4 @@ if __name__ == '__main__':
     data = RatDataset(train = True)
     train(model, data)
     print(model)
+
