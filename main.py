@@ -8,54 +8,54 @@ from torch.utils.data import Dataset
 import mat4py
 
 torch.manual_seed(1) # set the random seed
+fold = [[],[],[]]
 
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
+# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
+# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
+# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
+# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
+# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
+print("Done ")
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
+# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
+# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
+# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
+# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
+# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
+print("Done ")
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
+# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
+# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
+# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
+# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
+# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
+print("Done ")
 class RatDataset(Dataset):
 
     def __init__(self, train = True):
-        self.fold = [[],[],[]]
-
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
-        self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
-        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
-        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
-        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
-        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
-        # self.fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
-        print("Done ")
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
-        self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
-        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
-        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
-        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
-        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
-        # self.fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
-        print("Done ")
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
-        self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
-        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
-        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
-        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
-        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
-        # self.fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
-        print("Done ")
+        
         self.data = torch.empty(0,5600)
         self.labels = torch.empty(0)
 
         for i in range (3):
             for j in range (2):
                 if train:
-                    train_data = torch.tensor(self.fold[i][j]['training_data_rat']).transpose(1,0)
+                    train_data = torch.tensor(fold[i][j]['training_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, train_data), 0)
 
-                    train_lables = torch.tensor(self.fold[i][j]['training_data_labels']).squeeze(1)
+                    train_lables = torch.tensor(fold[i][j]['training_data_labels']).squeeze(1)
                     train_lables = torch.sub(train_lables, torch.ones_like(train_lables))
                     self.labels = torch.cat((self.labels, train_lables), 0)
 
                 else:
-                    test_data = torch.tensor(self.fold[i][j]['test_data_rat']).transpose(1,0)
+                    test_data = torch.tensor(fold[i][j]['test_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, test_data), 0)
 
-                    test_labels = torch.tensor(self.fold[i][j]['test_data_labels']).squeeze(1)
+                    test_labels = torch.tensor(fold[i][j]['test_data_labels']).squeeze(1)
                     test_labels = torch.sub(test_labels, torch.ones_like(test_labels))
 
                     self.labels = torch.cat((self.labels, test_labels), 0)
@@ -139,7 +139,7 @@ def get_accuracy(model, data):
 
 def train(model, data, batch_size=64, num_epochs=1):
     device = torch.device('cuda:0')
-    torch.set_default_device('cuda:0')
+    # torch.set_default_device('cuda:0')
     kwargs = {'num_workers': 2, 'pin_memory': True}
     train_loader = torch.utils.data.DataLoader(data, batch_size=batch_size, **kwargs)
     test_data = RatDataset(False)
@@ -168,8 +168,7 @@ def train(model, data, batch_size=64, num_epochs=1):
             # save the current training information
             iters.append(n)
             losses.append(float(loss)/batch_size)             # compute *average* loss
-            train_acc.append(get_accuracy(model, data)) # compute training accuracy
-            val_acc.append(get_accuracy(model, test_data))  # compute validation accuracy
+            
             n += 1
 
     # plotting
@@ -179,16 +178,10 @@ def train(model, data, batch_size=64, num_epochs=1):
     plt.ylabel("Loss")
     plt.show()
 
-    plt.title("Training Curve")
-    plt.plot(iters, train_acc, label="Train")
-    plt.plot(iters, val_acc, label="Validation")
-    plt.xlabel("Iterations")
-    plt.ylabel("Training Accuracy")
-    plt.legend(loc='best')
-    plt.show()
 
-    print("Final Training Accuracy: {}".format(train_acc[-1]))
-    print("Final Validation Accuracy: {}".format(val_acc[-1]))
+
+    print("Final Training Accuracy: {}".format(get_accuracy(model, data)))
+    print("Final Validation Accuracy: {}".format(get_accuracy(model, test_data)))
 
 if __name__ == '__main__':
     device = torch.device('cuda:0')
@@ -196,5 +189,5 @@ if __name__ == '__main__':
     model = CNN_Classifier().to(device)
     data = RatDataset(train = True)
     train(model, data)
-    print(model)
-
+    # print(model)
+# 
