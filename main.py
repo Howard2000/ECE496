@@ -12,27 +12,27 @@ fold = [[],[],[]]
 
 fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
 fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
-# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
-# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
-# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
-# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
-# fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
+fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
 print("Done ")
 fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
 fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
-# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
-# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
-# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
-# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
-# fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
+fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
 print("Done ")
 fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
 fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
-# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
-# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
-# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
-# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
-# fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
+fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
 print("Done ")
 class RatDataset(Dataset):
 
@@ -42,7 +42,7 @@ class RatDataset(Dataset):
         self.labels = torch.empty(0)
 
         for i in range (3):
-            for j in range (2):
+            for j in range (7):
                 if train:
                     train_data = torch.tensor(fold[i][j]['training_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, train_data), 0)
@@ -157,7 +157,7 @@ def train(model, data, batch_size=64, num_epochs=1):
                 print(f"TRaining {n}")
             imgs = imgs.to(device)
             labels = labels.to(device)
-            out = model(torch.reshape(imgs, (64,1,100,56))).to(device)         
+            out = model(torch.reshape(imgs, (-1,1,100,56))).to(device)         
             labels = labels.type(torch.LongTensor).to(device)    # forward pass
 
             loss = criterion(out, labels) # compute the total loss
