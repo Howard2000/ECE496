@@ -7,33 +7,6 @@ import torch.optim as optim #for gradient descent
 from torch.utils.data import Dataset
 import mat4py
 
-torch.manual_seed(1) # set the random seed
-fold = [[],[],[]]
-
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold1.mat'))
-fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold1.mat'))
-print("Done ")
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold2.mat'))
-fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold2.mat'))
-print("Done ")
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat4Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat5Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat6Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat7Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat8Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat9Training_Fold3.mat'))
-fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/ECE496/7x8/Rat10Training_Fold3.mat'))
-print("Done ")
 class RatDataset(Dataset):
 
     def __init__(self, train = True):
@@ -42,7 +15,7 @@ class RatDataset(Dataset):
         self.labels = torch.empty(0)
 
         for i in range (3):
-            for j in range (7):
+            for j in range (2):
                 if train:
                     train_data = torch.tensor(fold[i][j]['training_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, train_data), 0)
@@ -184,10 +157,37 @@ def train(model, data, batch_size=64, num_epochs=1):
     print("Final Validation Accuracy: {}".format(get_accuracy(model, test_data)))
 
 if __name__ == '__main__':
+    torch.manual_seed(1) # set the random seed
+    fold = [[],[],[]]
+
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold1.mat'))
+    print("Done ")
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold2.mat'))
+    print("Done ")
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold3.mat'))
+    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold3.mat'))
+    print("Done ")
     device = torch.device('cuda:0')
     print("CNN")
     model = CNN_Classifier().to(device)
     data = RatDataset(train = True)
-    train(model, data)
+    train(model, data, num_epochs=100)
     # print(model)
 # 
