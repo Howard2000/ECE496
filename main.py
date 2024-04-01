@@ -15,7 +15,7 @@ class RatDataset(Dataset):
         self.labels = torch.empty(0)
 
         for i in range (3):
-            for j in range (2):
+            for j in range (7):
                 if train:
                     train_data = torch.tensor(fold[i][j]['training_data_rat']).transpose(1,0)
                     self.data = torch.cat((self.data, train_data), 0)
@@ -51,20 +51,23 @@ class CNN_Classifier(nn.Module):
         self.conv1 = nn.Conv2d(1, 64, 8) #in_channels, out_chanels, kernel_size
         self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv2 = nn.Conv2d(64, 64, 4) #in_channels, out_chanels, kernel_size
-        self.pool = nn.MaxPool2d(2, 2) #kernel_size, stride 
+        self.pool2 = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.conv3 = nn.Conv2d(64, 64, 2) #in_channels, out_chanels, kernel_size
+        self.pool3 = nn.MaxPool2d(2, 2) #kernel_size, stride 
         self.fc1 = nn.Linear(2560, 256)
-        self.fc2 = nn.Linear(256, 3)
+        self.fc2 = nn.Linear(256, 64)
+        self.fc3 = nn.Linear(64, 3)
         print('Convolutional Neural Network Architecture Done')
 
 
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
-        x = self.pool(F.relu(self.conv2(x)))
-        x = self.pool(F.relu(self.conv3(x)))
+        x = self.pool2(F.relu(self.conv2(x)))
+        x = self.pool3(F.relu(self.conv3(x)))
         x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
-        x = self.fc2(x)
+        x = F.relu(self.fc2(x))
+        x = self.fc3(x)
         return x
     
 
@@ -130,13 +133,14 @@ def train(model, data, batch_size=64, num_epochs=1):
                 print(f"TRaining {n}")
             imgs = imgs.to(device)
             labels = labels.to(device)
+            optimizer.zero_grad()         # a clean up step for PyTorch
             out = model(torch.reshape(imgs, (-1,1,100,56))).to(device)         
             labels = labels.type(torch.LongTensor).to(device)    # forward pass
 
             loss = criterion(out, labels) # compute the total loss
             loss.backward()               # backward pass (compute parameter updates)
             optimizer.step()              # make the updates for each parameter
-            optimizer.zero_grad()         # a clean up step for PyTorch
+            
 
             # save the current training information
             iters.append(n)
@@ -145,7 +149,8 @@ def train(model, data, batch_size=64, num_epochs=1):
             val_acc.append(get_accuracy(model, train=False))
 
             n += 1
-
+        print("Epoch {} Training Accuracy: {}".format(epoch, get_accuracy(model, data)))
+        print("Epoch {} Validation Accuracy: {}".format(epoch, get_accuracy(model, test_data)))
     # plotting
     plt.title("Training Curve")
     plt.plot(iters, losses, label="Train")
