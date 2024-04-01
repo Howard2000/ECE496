@@ -141,7 +141,9 @@ def train(model, data, batch_size=64, num_epochs=1):
             # save the current training information
             iters.append(n)
             losses.append(float(loss)/batch_size)             # compute *average* loss
-            
+            train_acc.append(get_accuracy(model, train=True))
+            val_acc.append(get_accuracy(model, train=False))
+
             n += 1
 
     # plotting
@@ -151,6 +153,13 @@ def train(model, data, batch_size=64, num_epochs=1):
     plt.ylabel("Loss")
     plt.show()
 
+    plt.title("Training Curve")
+    plt.plot(iters, train_acc, label="Train")
+    plt.plot(iters, val_acc, label="Validation")
+    plt.xlabel("Iterations")
+    plt.ylabel("Training Accuracy")
+    plt.legend(loc='best')
+    plt.show()
 
 
     print("Final Training Accuracy: {}".format(get_accuracy(model, data)))
@@ -160,29 +169,29 @@ if __name__ == '__main__':
     torch.manual_seed(1) # set the random seed
     fold = [[],[],[]]
 
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold1.mat'))
-    fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold1.mat'))
+    fold[0].append(mat4py.loadmat('./data/Rat4Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold1.mat'))
+    # fold[0].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold1.mat'))
     print("Done ")
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold2.mat'))
-    fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold2.mat'))
+    fold[1].append(mat4py.loadmat('./data/Rat4Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold2.mat'))
+    # fold[1].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold2.mat'))
     print("Done ")
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat4Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold3.mat'))
-    fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('./data/Rat4Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat5Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat6Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat7Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat8Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat9Training_Fold3.mat'))
+    # fold[2].append(mat4py.loadmat('C:/Users/pablo/Documents/Capstone/7x8/Rat10Training_Fold3.mat'))
     print("Done ")
     device = torch.device('cuda:0')
     print("CNN")

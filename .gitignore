@@ -1,5 +1,6 @@
 #custom ignore
 rawdata/
+data/
 
 #Python ignore
 # Byte-compiled / optimized / DLL files
