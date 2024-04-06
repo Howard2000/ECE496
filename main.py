@@ -40,8 +40,11 @@ class RatDataset(Dataset):
         idx = torch.randperm(self.data.shape[0])
         self.data = self.data[idx].view(self.data.size())
         self.labels = self.labels[idx].view(self.labels.size())
-
         print(f"shape: {self.data.size()} lables: {self.labels.size()}")
+        if (train):
+            self.data = torch.tensor_split(self.data, 100, dim = 0)[0]
+            self.labels = torch.tensor_split(self.labels, 100, dim = 0)[0]
+            print(f"train shape: {self.data.size()} lables: {self.labels.size()}")
 
     def __len__(self):
         return torch.numel(self.labels)
@@ -140,7 +143,14 @@ def train(model, data, batch_size=64, num_epochs=1):
     train_acc = []
     val_acc = []
     iters, losses, train_acc, val_acc = [], [], [], []
+    iters.append(0)
 
+    train = get_accuracy(model, data)
+    val = get_accuracy(model, test_data)
+    train_acc.append(train)
+    val_acc.append(val)
+    print("Initial Training Accuracy: {}".format( train))
+    print("Initial Validation Accuracy: {}".format( val))
     # training
     n = 0 # the number of iterations
     for epoch in range(num_epochs):
@@ -160,25 +170,15 @@ def train(model, data, batch_size=64, num_epochs=1):
             # save the current training information
             
             losses.append(float(loss)/batch_size)             # compute *average* loss
-            if (n % 2000 == 0 ):
-                print(f"TRaining {n}")
-                # print(f"out.shape: {out.size()}")
-                # print(f"lables shape: {labels.size()}")
-            
-            n += 1
-        iters.append(epoch)
+        iters.append(epoch+1)
         train = get_accuracy(model, data)
         val = get_accuracy(model, test_data)
         train_acc.append(train)
         val_acc.append(val)
-        print("Epoch {} Training Accuracy: {}".format(epoch, train))
-        print("Epoch {} Validation Accuracy: {}".format(epoch, val))
-    # plotting
-    plt.title("Training Curve")
-    plt.plot(losses, label="Train")
-    plt.xlabel("Iterations")
-    plt.ylabel("Loss")
-    
+        print("-----------------------")
+        print("{} Train Accuracy: {}".format(epoch+1, train))
+        print("{} Val Accuracy: {}".format(epoch+1, val))
+
     plt.title("Acc Curve")
     plt.plot(iters, train_acc, label="Train")
     plt.plot(iters, val_acc, label="Test")
@@ -186,6 +186,13 @@ def train(model, data, batch_size=64, num_epochs=1):
     plt.ylabel("Accuracy")
     plt.legend(loc='best')
     plt.show()
+        # plotting
+    plt.title("Training Curve")
+    plt.plot(losses, label="Train")
+    plt.xlabel("Iterations")
+    plt.ylabel("Loss")
+    plt.show()
+    
 
 
 
